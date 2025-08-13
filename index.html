@@ -206,10 +206,26 @@ img{max-width:100%;display:block}a{color:inherit}.container{width:min(1200px,92v
     <a class="btn icon-btn" href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">Odwiedź profil ↗</a>
   </div>
 
-  <!-- Skeleton loader (pokazywany zanim załaduje się iframe) -->
-  <div id="ig-skeleton" class="ig-skeleton-grid" aria-hidden="true">
-    <div></div><div></div><div></div><div></div><div></div><div></div>
+  <div class="oembed-grid">
+    <!-- WSTAW TU PERMALINKI DO POSTÓW Ewy -->
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_1/" data-instgrm-version="14"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_2/" data-instgrm-version="14"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_3/" data-instgrm-version="14"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_4/" data-instgrm-version="14"></blockquote>
   </div>
+</section>
+
+<script async src="//www.instagram.com/embed.js"></script>
+
+<style>
+  .oembed-grid{
+    display:grid;gap:12px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  @media(min-width:900px){.oembed-grid{grid-template-columns:repeat(4,1fr)}}
+  .instagram-media{background:var(--card);border:1px solid var(--stroke);border-radius:12px;overflow:hidden}
+</style>
+
 
   <!-- LightWidget embed -->
   <div class="ig-embed-wrap">
