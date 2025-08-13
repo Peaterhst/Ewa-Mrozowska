@@ -200,20 +200,63 @@ img{max-width:100%;display:block}a{color:inherit}.container{width:min(1200px,92v
 
   <!-- INSTAGRAM (fallback, auto-podmiana po wdrożeniu /api/ig) -->
   <section class="section container" aria-label="Instagram">
-    <div class="section__head">
-      <h2 class="h2">Instagram</h2>
-      <a class="btn icon-btn" href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">Odwiedź profil ↗</a>
-    </div>
-    <div id="insta" class="insta-grid" aria-live="polite">
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 1" loading="lazy"></a>
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 2" loading="lazy"></a>
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 3" loading="lazy"></a>
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 4" loading="lazy"></a>
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 5" loading="lazy"></a>
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="Instagram 6" loading="lazy"></a>
-    </div>
-    <p style="color:var(--muted);margin-top:.75rem">Po wdrożeniu endpointu <code>/api/ig</code> powyższe kafelki zamienią się na najnowsze posty.</p>
-  </section>
+  <div class="section__head">
+    <h2 class="h2">Instagram</h2>
+    <a class="btn icon-btn" href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">Odwiedź profil ↗</a>
+  </div>
+
+  <div id="ig-feed" class="insta-grid" aria-live="polite">
+    <!-- skeleton 6 szt. -->
+    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+  </div>
+  <p id="ig-msg" style="color:var(--muted);margin-top:.75rem"></p>
+</section>
+
+<style>
+  .ig-skel{aspect-ratio:1;border-radius:12px;overflow:hidden;
+    background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.12),rgba(255,255,255,.06));
+    animation:igShimmer 1.2s infinite linear;background-size:200% 100%}
+  @keyframes igShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+</style>
+
+<script>
+(async ()=>{
+  const wrap=document.getElementById('ig-feed');
+  const msg=document.getElementById('ig-msg');
+  try{
+    const r=await fetch('/api/ig',{cache:'no-store'});
+    const data=await r.json();
+    if(Array.isArray(data) && data.length){
+      wrap.innerHTML='';
+      data.slice(0,12).forEach(p=>{
+        const a=document.createElement('a');
+        a.href=p.permalink||'https://www.instagram.com/ewamrozowska.makeup/';
+        a.target='_blank'; a.rel='noopener';
+        const img=document.createElement('img');
+        img.loading='lazy'; img.alt=p.alt||'Instagram post';
+        img.src=p.thumb||p.url;
+        a.appendChild(img); wrap.appendChild(a);
+      });
+      msg.textContent='';
+    }else{
+      msg.textContent='Nie udało się pobrać najnowszych postów – wyświetlam przykładową siatkę.';
+      // zostawiamy skeleton? podmień na fallback (opcjonalnie)
+      wrap.innerHTML = `
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 1" loading="lazy"></a>
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 2" loading="lazy"></a>
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 3" loading="lazy"></a>
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 4" loading="lazy"></a>
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 5" loading="lazy"></a>
+        <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener"><img src="https://i.imgur.com/CaEebve.jpeg" alt="IG 6" loading="lazy"></a>`;
+    }
+  }catch(e){
+    console.error('IG feed error', e);
+    msg.textContent='Błąd połączenia z Instagramem – pokazuję fallback.';
+  }
+})();
+</script>
+
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Podgląd zdjęcia">
