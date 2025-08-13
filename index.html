@@ -18,7 +18,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ewa Mrozowska","jobTitle":"Makijażystka","image":"https://i.imgur.com/CaEebve.jpeg","sameAs":["https://www.instagram.com/ewamrozowska.makeup/"],"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"}}</script>
 
 <style>
-/* === Minimal Luxe 2025 (lekko zminifikowane) === */
+/* === Minimal Luxe 2025 === */
 :root{--bg:#0b0b0f;--fg:#e8e9ec;--muted:#b6b8c0;--gold:#d6b86a;--glass:rgba(255,255,255,.06);--card:#101218;--stroke:#1a1d24;--radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35);--font-serif:"Playfair Display",serif;--font-sans:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif}
 :root.light{--bg:#fff;--fg:#0d0f14;--muted:#4b5360;--glass:rgba(0,0,0,.04);--card:#f7f8fa;--stroke:#e9eaee;--shadow:0 10px 30px rgba(0,0,0,.08)}
 *{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -87,18 +87,23 @@ img{max-width:100%;display:block}a{color:inherit}.container{width:min(1200px,92v
 .textarea{min-height:140px;resize:vertical}
 .status{min-height:1.1rem}
 
-/* Instagram (fallback grid) */
+/* Instagram fallback grid (używane w innych wariantach) */
 .insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
 .insta-grid a{display:block;border-radius:12px;overflow:hidden;border:1px solid var(--stroke);background:var(--card)}
 .insta-grid img{aspect-ratio:1;object-fit:cover;transition:transform .35s ease}
 .insta-grid a:hover img{transform:scale(1.04)}
+
+/* Instagram oEmbed grid */
+.oembed-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:900px){.oembed-grid{grid-template-columns:repeat(4,1fr)}}
+.instagram-media{background:var(--card);border:1px solid var(--stroke);border-radius:12px;overflow:hidden}
 
 /* Footer + reveals */
 .footer{padding:40px 0;color:var(--muted);border-top:1px solid var(--stroke);text-align:center}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
 .reveal.show{opacity:1;transform:none}
 
-/* Prefers reduced motion */
+/* Reduce motion */
 @media (prefers-reduced-motion:reduce){.hero__bg{transition:none;transform:none}.reveal{transition:none}.card__overlay{transition:none}}
 
 /* Responsive */
@@ -198,78 +203,38 @@ img{max-width:100%;display:block}a{color:inherit}.container{width:min(1200px,92v
     </div>
   </section>
 
-  <!-- INSTAGRAM (fallback, auto-podmiana po wdrożeniu /api/ig) -->
-  <!-- ==== Instagram (LightWidget – free) ==== -->
-<section class="section container" aria-label="Instagram">
-  <div class="section__head">
-    <h2 class="h2">Instagram</h2>
-    <a class="btn icon-btn" href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">Odwiedź profil ↗</a>
-  </div>
+  <!-- INSTAGRAM (oEmbed) -->
+  <section class="section container" aria-label="Instagram">
+    <div class="section__head">
+      <h2 class="h2">Instagram</h2>
+      <a class="btn icon-btn" href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">Odwiedź profil ↗</a>
+    </div>
+    <div class="oembed-grid">
+      <!-- PODMIEŃ na prawdziwe linki do postów -->
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CrWQqRSKo-A/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMItS4fNghy/?utm_source=ig_web_copy_link" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DL7lKxRoXXG/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJZh1k8sHVy/?img_index=1" data-instgrm-version="14"></blockquote>
+    </div>
+  </section>
+  <script async src="https://www.instagram.com/embed.js"></script>
 
-  <div class="oembed-grid">
-    <!-- WSTAW TU PERMALINKI DO POSTÓW Ewy -->
-    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_1/" data-instgrm-version="14"></blockquote>
-    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_2/" data-instgrm-version="14"></blockquote>
-    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_3/" data-instgrm-version="14"></blockquote>
-    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/POST_ID_4/" data-instgrm-version="14"></blockquote>
-  </div>
-</section>
-
-<script async src="//www.instagram.com/embed.js"></script>
-
-<style>
-  .oembed-grid{
-    display:grid;gap:12px;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-  @media(min-width:900px){.oembed-grid{grid-template-columns:repeat(4,1fr)}}
-  .instagram-media{background:var(--card);border:1px solid var(--stroke);border-radius:12px;overflow:hidden}
-</style>
-
-
-  <!-- LightWidget embed -->
-  <div class="ig-embed-wrap">
-    <iframe
-      title="Instagram feed"
-      src="https://cdn.lightwidget.com/widgets/YOUR_WIDGET_ID.html"
-      class="ig-embed"
-      scrolling="no"
-      allowtransparency="true"
-      onload="document.getElementById('ig-skeleton')?.classList.add('hidden')"
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <noscript>
-    <p>Włącz JavaScript, aby zobaczyć aktualne zdjęcia z Instagrama lub odwiedź
-      <a href="https://www.instagram.com/ewamrozowska.makeup/" target="_blank" rel="noopener">profil Ewy ↗</a>.
-    </p>
-  </noscript>
-</section>
-
-<!-- LightWidget skrypt (wymagany przez ich embed) -->
-<script async src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-
-<style>
-  /* Skeleton */
-  .ig-skeleton-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:10px}
-  .ig-skeleton-grid.hidden{display:none}
-  .ig-skeleton-grid>div{aspect-ratio:1;border-radius:12px;overflow:hidden;background:
-    linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.12),rgba(255,255,255,.06));
-    animation:igShimmer 1.1s infinite linear;background-size:200% 100%}
-  @keyframes igShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-  @media (max-width:1024px){.ig-skeleton-grid{grid-template-columns:repeat(3,1fr)}}
-  @media (max-width:640px){.ig-skeleton-grid{grid-template-columns:repeat(2,1fr)}}
-
-  /* Responsive wrapper dla iframe */
-  .ig-embed-wrap{position:relative;width:100%;aspect-ratio:6/2.2}
-  @media (max-width:1024px){.ig-embed-wrap{aspect-ratio:3/2}}
-  @media (max-width:640px){.ig-embed-wrap{aspect-ratio:2/2.4}}
-  .ig-embed{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:12px;filter:saturate(1.02)}
-  .ig-embed-wrap:hover .ig-embed{transform:translateY(-1px);transition:transform .25s ease}
-</style>
-
-
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2 class="h2">Kontakt & rezerwacja</h2>
+        <span style="color:var(--muted)">Odpowiadam tego samego dnia</span>
+      </div>
+      <form class="form reveal" id="contactForm" novalidate>
+        <label><span class="sr-only">Imię</span><input class="input" id="name" name="name" autocomplete="name" placeholder="Imię" required></label>
+        <label><span class="sr-only">Email</span><input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="Email" required></label>
+        <label><span class="sr-only">Wiadomość</span><textarea class="textarea" id="message" name="message" placeholder="Wiadomość" required></textarea></label>
+        <button class="btn" type="submit">Wyślij</button>
+        <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Podgląd zdjęcia">
@@ -282,7 +247,7 @@ img{max-width:100%;display:block}a{color:inherit}.container{width:min(1200px,92v
 </footer>
 
 <script>
-/* === JS (zminifikowany lekko) === */
+/* === JS === */
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 (()=>{/* Rok */$('#year').textContent=(new Date).getFullYear();
 /* Theme */const root=document.documentElement,btn=$('#themeBtn'),saved=localStorage.getItem('theme');if(saved==='light')root.classList.add('light');const icon=()=>btn.textContent=root.classList.contains('light')?'🌞':'🌙';icon();btn.addEventListener('click',()=>{root.classList.toggle('light');localStorage.setItem('theme',root.classList.contains('light')?'light':'dark');icon()});
@@ -290,9 +255,7 @@ const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelecto
 /* Reveal */const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}})},{threshold:.2});$$('.reveal').forEach(el=>io.observe(el));
 /* Parallax */const bg=$('.hero__bg');let lastY=0;const par=()=>{const y=window.scrollY||window.pageYOffset,delta=Math.min(1,Math.max(-1,(y-lastY)/60));lastY=y;const t=Math.min(40,y*.12);bg.style.transform=`translate3d(0,${t}px,0) scale(${1.05+t/1500}) rotate(${.2*delta}deg)`};window.addEventListener('scroll',par,{passive:true});par();
 /* Lightbox */const lb=$('#lightbox'),img=$('#lightboxImg');$$('[data-lightbox]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();img.src=a.href;lb.classList.add('open');lb.focus()}));lb.addEventListener('click',()=>lb.classList.remove('open'));window.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
-/* Form */$('#contactForm').addEventListener('submit',e=>{e.preventDefault();const n=$('#name').value.trim(),m=$('#message').value.trim(),em=$('#email').value.trim(),st=$('#formStatus'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)&&n.length>1&&m.length>2;if(!ok){st.textContent='Uzupełnij poprawnie pola (imię, email, wiadomość).';st.style.color='#ff6b6b'}else{st.textContent='Dziękuję! Odezwę się wkrótce. ✔️';st.style.color='#7CDA7C';e.target.reset()}});
-/* Instagram live (po wdrożeniu /api/ig) */
-fetch('/api/ig').then(r=>r.ok?r.json():Promise.reject()).then(items=>{if(!Array.isArray(items)||!items.length)return;const g=$('#insta');g.innerHTML='';items.slice(0,12).forEach(p=>{const a=document.createElement('a');a.href=p.permalink||'https://www.instagram.com/ewamrozowska.makeup/';a.target='_blank';a.rel='noopener';const i=document.createElement('img');i.loading='lazy';i.alt=p.alt||'Instagram post';i.src=p.thumb||p.url||'https://i.imgur.com/CaEebve.jpeg';a.appendChild(i);g.appendChild(a);});}).catch(()=>{/* zostaje fallback */});
+/* Form (guard, gdyby ktoś usunął sekcję) */const form=$('#contactForm');if(form){form.addEventListener('submit',e=>{e.preventDefault();const n=$('#name').value.trim(),m=$('#message').value.trim(),em=$('#email').value.trim(),st=$('#formStatus'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)&&n.length>1&&m.length>2;if(!ok){st.textContent='Uzupełnij poprawnie pola (imię, email, wiadomość).';st.style.color='#ff6b6b'}else{st.textContent='Dziękuję! Odezwę się wkrótce. ✔️';st.style.color='#7CDA7C';form.reset()}});}
 })();
 </script>
 </body>
